@@ -41,6 +41,39 @@ function SelectBox({setBarType, setCode}){
         </>
     )
 }
+//PDF download button
+function PdfDownloadButton({saveFunc}) {
+    return(
+        <>
+            <div className='downloadPdfButton' onClick={saveFunc}>
+                <p className='downloadPdfText'>Download as PDF</p>
+            </div>
+        </>
+    )
+}
+//PNG download button
+function PngDownloadButton() {
+    return(
+        <>
+            <a href="" id='barcodeDownload'>
+                <div className='downloadPngButton'>
+                    <p className='downloadPngText'>Download as PNG</p>
+                </div>
+            </a>
+        </>
+    )
+}
+//Div Containing all the download buttons
+function DownloadButtons({func}) {
+    return(
+        <>
+            <div id='downloadButtonWrapper'>
+                <PdfDownloadButton saveFunc = {func}/>
+                <PngDownloadButton/>
+            </div>
+        </>
+    )
+}
 
 
 
@@ -77,34 +110,24 @@ function App() {
 
     },[code, barType, error]);
 
-
+    //Function for saving barcode as png
     function saveBarcode(barcodeId){
+        //----For downloading normal png----
+        //Gets the barcode element
         var barcode = document.getElementById(barcodeId)
+        //Turns it to DataURL element 
         var barcodeUrl = barcode.toDataURL("image/png");
 
-
+        //Gets the a element 
         var link = document.getElementById("barcodeDownload");
-        var text = document.createTextNode("Download barcode");
-        link.appendChild(text);
-
+        //Sets its attribute to download the barcode dataURL element
         link.setAttribute("download", "Barcode.png");
         link.setAttribute("href", barcodeUrl);
-
-        const barcodeWidth = 100;
-        const barcodeHeight = (barcode.height / barcode.width) * barcodeWidth;
-
-        const doc = new jsPDF();
-        //Image, format of the file, x-cord, y-cord, width, height
-        doc.addImage(barcodeUrl, "PNG", 1, 10, barcodeWidth, barcodeHeight );
-        doc.addImage(barcodeUrl, "PNG", 110, 10, barcodeWidth, barcodeHeight );
-        doc.save("barcode.pdf");
-
+        //Sets the a display to block
+        link.style.display="block"
 
     }
-        
-
-
-
+    //Function for checking if the input has correct attributs for chosen barcode format
     function lengthCheck(input) {
         //length  of input
         const inputLength = input.length
@@ -151,7 +174,7 @@ function App() {
                 if(!isnum){
                     errorMessage = "doesnt contain only digits"
                 }
-                if (inputLength !== 10 || inputLength !== 13) {
+                if (inputLength !== 10 && inputLength !== 13) {
                     errorMessage = "invalid length"
                 }
                 break;
@@ -164,7 +187,7 @@ function App() {
                 }
                 break;
             case "CODABAR":
-                if (inputLength < 10 || inputLength > 16) {
+                if (inputLength < 10 && inputLength > 16) {
                     errorMessage = "invalid length"
                 }
                 break;
@@ -172,7 +195,7 @@ function App() {
                 if(!isnum){
                     errorMessage = "doesnt contain only digits"
                 }
-                if (inputLength !== 8 || inputLength !== 10) {
+                if (inputLength !== 8 && inputLength !== 10) {
                     errorMessage = "invalid length"
                 }
                 break;
@@ -180,7 +203,7 @@ function App() {
                 if(!isnum){
                     errorMessage = "doesnt contain only digits"
                 }
-                if (inputLength !== 5 || inputLength !== 9) {
+                if (inputLength !== 5 && inputLength !== 9) {
                     errorMessage = "invalid length"
                 }
                 break;
@@ -201,9 +224,10 @@ function App() {
             setError('')
             //sets the code for barcode
             setCode(input)
+            //Displays the download buttons
+            document.getElementById("downloadButtonWrapper").style.display="block";
         }
     }
-
     //Function for sending input value to process
     function formSubmit(event) {
         //Stops the sending and reloading
@@ -226,6 +250,26 @@ function App() {
             
         }
     }
+
+    function savePDF(barcodeID) {
+        //Gets the barcode element
+        var barcode = document.getElementById(barcodeID)
+        //Turns it to DataURL element 
+        var barcodeUrl = barcode.toDataURL("image/png");
+        //Generated barcode width
+        const barcodeWidth = 100;
+        //Barcode height to keep the ratio
+        const barcodeHeight = (barcode.height / barcode.width) * barcodeWidth;
+        //Initialize pdf object
+        const doc = new jsPDF();
+        //Add the barcode DataUrl to it in format of PNG
+        //Image, format of the file, x-cord, y-cord, width, height
+        doc.addImage(barcodeUrl, "PNG", 1, 10, barcodeWidth, barcodeHeight );
+        doc.addImage(barcodeUrl, "PNG", 110, 10, barcodeWidth, barcodeHeight );
+        //Save the pdf
+        doc.save("barcode.pdf");
+        
+    }
     
 
   return (
@@ -236,7 +280,10 @@ function App() {
             </div>
             <CodeForm onSubmit={formSubmit}/>
             <SelectBox setBarType={setBarType} setCode={setCode}/>
-            <a href="" id='barcodeDownload'></a>
+            <DownloadButtons func = {()=>savePDF("barcode")}/>
+
+
+
             {errorElement()}
         </div>
     </>
