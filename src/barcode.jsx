@@ -65,6 +65,7 @@ function App() {
             
             if (validFormats.includes(barType)) {
                 JsBarcode("#barcode", code, { format: barType });
+                saveBarcode("barcode")
             } else {
                 console.log(barType)
                 setError('Invalid barcode format');
@@ -74,6 +75,23 @@ function App() {
         }
 
     },[code, barType, error]);
+
+
+    function saveBarcode(barcodeId){
+        var barcode = document.getElementById(barcodeId)
+        var barcodeUrl = barcode.toDataURL("image/png")
+
+
+        var link = document.getElementById("barcodeDownload")
+        var text = document.createTextNode("Download barcode")
+        link.appendChild(text)
+
+        link.setAttribute("download", "Barcode.png")
+        link.setAttribute("href", barcodeUrl)
+    }
+        
+
+
 
     function lengthCheck(input) {
         //length  of input
@@ -198,7 +216,6 @@ function App() {
     }
 
 
-
   return (
     <>
         <div className='wrapper'>
@@ -207,6 +224,7 @@ function App() {
             </div>
             <CodeForm onSubmit={formSubmit}/>
             <SelectBox setBarType={setBarType} setCode={setCode}/>
+            <a href="" id='barcodeDownload'></a>
             {errorElement()}
         </div>
     </>
