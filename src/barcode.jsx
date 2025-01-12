@@ -3,6 +3,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './barcode.css'
 import JsBarcode from "jsbarcode";
+import { jsPDF } from "jspdf";
 
 
 //Form for submiting the code
@@ -79,15 +80,26 @@ function App() {
 
     function saveBarcode(barcodeId){
         var barcode = document.getElementById(barcodeId)
-        var barcodeUrl = barcode.toDataURL("image/png")
+        var barcodeUrl = barcode.toDataURL("image/png");
 
 
-        var link = document.getElementById("barcodeDownload")
-        var text = document.createTextNode("Download barcode")
-        link.appendChild(text)
+        var link = document.getElementById("barcodeDownload");
+        var text = document.createTextNode("Download barcode");
+        link.appendChild(text);
 
-        link.setAttribute("download", "Barcode.png")
-        link.setAttribute("href", barcodeUrl)
+        link.setAttribute("download", "Barcode.png");
+        link.setAttribute("href", barcodeUrl);
+
+        const barcodeWidth = 100;
+        const barcodeHeight = (barcode.height / barcode.width) * barcodeWidth;
+
+        const doc = new jsPDF();
+        //Image, format of the file, x-cord, y-cord, width, height
+        doc.addImage(barcodeUrl, "PNG", 1, 10, barcodeWidth, barcodeHeight );
+        doc.addImage(barcodeUrl, "PNG", 110, 10, barcodeWidth, barcodeHeight );
+        doc.save("barcode.pdf");
+
+
     }
         
 
@@ -214,7 +226,7 @@ function App() {
             
         }
     }
-
+    
 
   return (
     <>
