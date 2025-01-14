@@ -100,6 +100,7 @@ function App() {
             if (validFormats.includes(barType)) {
                 JsBarcode("#barcode", code, { format: barType });
                 saveBarcode("barcode")
+                barcodeHistory();
             } else {
                 console.log(barType)
                 setError('Invalid barcode format');
@@ -127,6 +128,22 @@ function App() {
         link.style.display="block"
 
     }
+
+
+    function barcodeHistory() {
+        const codeRecord = JSON.parse(localStorage.getItem('codeRecord')) || [];
+        const newId = codeRecord.length
+        codeRecord.push({
+            "id": newId,
+            "code": code,
+            "format": barType
+        });
+        localStorage.setItem('codeRecord', JSON.stringify(codeRecord));
+    }
+
+
+
+
     //Function for checking if the input has correct attributs for chosen barcode format
     function lengthCheck(input) {
         //length  of input
@@ -225,7 +242,8 @@ function App() {
             //sets the code for barcode
             setCode(input)
             //Displays the download buttons
-            document.getElementById("downloadButtonWrapper").style.display="block";
+            document.getElementById("downloadButtonWrapper").style.display = "block";
+            
         }
     }
     //Function for sending input value to process
