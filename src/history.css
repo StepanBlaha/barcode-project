@@ -1,0 +1,16 @@
+.recordList{
+    height: fit-content;
+    width: 80%;
+    margin: 0 auto;
+    border: 2px solid black;
+}
+.record{
+    height: fit-content;
+    width: 100%;
+    float: left;
+    border: 1px solid red;
+}
+.barcodeCode, .barcodeFormat{
+    width: 50%;
+    float: left;
+}

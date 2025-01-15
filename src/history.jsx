@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
-import './barcode.css'
 import JsBarcode from "jsbarcode";
 import { jsPDF } from "jspdf";
-
+import './history.css'
 
 
 

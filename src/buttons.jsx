@@ -1,0 +1,51 @@
+import { useEffect, useState } from 'react'
+import reactLogo from './assets/react.svg'
+import viteLogo from '/vite.svg'
+import JsBarcode from "jsbarcode";
+import { jsPDF } from "jspdf";
+import './history.css'
+
+
+
+
+function PageButtons({page, setPage}) {
+    
+
+    function renderBarcode() {
+        setPage("barcode")
+    }
+    function renderHistory() {
+        setPage("history")
+    }
+
+    function ButtonRender({ barcodeRender, historyRender }) {
+        if (page === "barcode") {
+            return (
+                <>
+                    <div className='pageChange' onClick={historyRender}>
+                        <p>History</p>    
+                    </div>
+                </>
+            )
+        } else {
+            return (
+                <>
+                    <div className='pageChange' onClick={barcodeRender}>
+                        <p>Barcode</p>    
+                    </div>
+                </>
+            )
+        }
+
+    }
+    return (
+        <>
+            <ButtonRender barcodeRender={renderBarcode} historyRender={renderHistory } />
+        </>
+    )
+
+}
+
+
+
+export default PageButtons
