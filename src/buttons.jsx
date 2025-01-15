@@ -17,6 +17,7 @@ function PageButtons({page, setPage}) {
     function renderHistory() {
         setPage("history")
     }
+    console.log(page)
 
     function ButtonRender({ barcodeRender, historyRender }) {
         if (page === "barcode") {

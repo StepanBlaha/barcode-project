@@ -77,7 +77,7 @@ function DownloadButtons({func}) {
 
 
 
-function App() {
+function BarcodeApp() {
     //State for managing inputed code
     const [code, setCode] = useState(null)
     //State for changin barcode method in future
@@ -308,4 +308,4 @@ function App() {
   )
 }
 
-export default App
+export default BarcodeApp
