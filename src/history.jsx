@@ -32,7 +32,6 @@ function HistoryApp() {
     return (
         <>  
             <RecordList/>
-        
         </>
     )
 

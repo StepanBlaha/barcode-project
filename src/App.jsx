@@ -8,13 +8,20 @@ import HistoryApp from './history.jsx'
 import PageButtons from './buttons.jsx'
 
 function App() {
-  const [page, setPage] = useState("barcode")
+  const [page, setPage] = useState("history")
   
-  if(page ==="barcode"){
+  if (page === "barcode") {
+    console.log('Je to bar')
     return (
       <>
-        <BarcodeApp />
-        <PageButtons page={page} setPage={setPage} />
+        <div className='wrapper'>
+          <div className='mainContent'>
+            <BarcodeApp />
+          </div>
+          <div className='buttonNav'>
+            <PageButtons page={page} setPage={setPage} />
+          </div>
+        </div>
       </>
     )
   }
@@ -22,17 +29,29 @@ function App() {
   if(page === "history"){
     return (
       <>
-        <HistoryApp />
-        <PageButtons page={page} setPage={setPage} />
+        <div className='wrapper'>
+          <div className='mainContent'>
+            <HistoryApp />
+          </div>
+          <div className='buttonNav'>
+            <PageButtons page={page} setPage={setPage} />
+          </div>
+        </div>
       </>
     )
   }
   else{
     return (
       <>
-        <BarcodeApp />
-        <HistoryApp />
-        <PageButtons page={page} setPage={setPage} />
+        <div className='wrapper'>
+          <div className='mainContent'>
+            <BarcodeApp />
+            <HistoryApp />
+          </div>
+          <div className='buttonNav'>
+            <PageButtons page={page} setPage={setPage} />
+          </div>
+        </div>
       </>
     )
   }

@@ -292,18 +292,16 @@ function BarcodeApp() {
 
   return (
     <>
-        <div className='wrapper'>
-            <div className='barcodeWrap'>
-                <canvas id="barcode"></canvas>
-            </div>
-            <CodeForm onSubmit={formSubmit}/>
-            <SelectBox setBarType={setBarType} setCode={setCode}/>
-            <DownloadButtons func = {()=>savePDF("barcode")}/>
-
-
-
-            {errorElement()}
+        <div className='barcodeWrap'>
+            <canvas id="barcode"></canvas>
         </div>
+        <CodeForm onSubmit={formSubmit}/>
+        <SelectBox setBarType={setBarType} setCode={setCode}/>
+        <DownloadButtons func = {()=>savePDF("barcode")}/>
+
+
+
+        {errorElement()}
     </>
   )
 }
