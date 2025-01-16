@@ -13,7 +13,7 @@ html,  body{
 }
 .wrapper{
     height: 80%;
-    width: 230px;
+    width: 300px;
     border: 2px solid red;
     margin: auto auto;
 }

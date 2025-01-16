@@ -13,7 +13,7 @@ html,  body{
 }
 .wrapper{
     height: 80%;
-    width: 230px;
+    width: 300px;
     border: 2px solid red;
     margin: auto auto;
 }
@@ -40,8 +40,22 @@ html,  body{
     width: 100%;
     float: left;
     border: 1px solid red;
+    margin-bottom: 10px;
 }
 .barcodeCode, .barcodeFormat{
     width: 50%;
     float: left;
+    border: 1px solid blue;
+}
+.barcodeCode{
+    overflow: auto;
+}
+.barcodeSave{
+    float: left;
+    height: 100%;
+    width: 100%;
+    border: 1px solid yellow;
+}
+#barcodeHidden{
+    display: none;
 }
