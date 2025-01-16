@@ -41,7 +41,7 @@ function HistoryApp() {
         <div className="record" key={record.id}>
             <div className="barcodeCode">{record.code} </div>
             <div className="barcodeFormat">{record.format}</div>
-            <div className='barcodeSave' id={record.id} onClick={() => savePDF(record.id, record.code, record.format)}>Save pdf</div>
+            <div className='barcodeSaveCenter' ><div className='barcodeSave'  id={record.id} onClick={() => savePDF(record.id, record.code, record.format)}>Save pdf</div></div>
         </div>
    
 
