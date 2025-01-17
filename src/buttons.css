@@ -1,0 +1,15 @@
+.pageChangeButton{
+    height: 50px;
+    width: 100px;
+    background-color: #7B7B7B;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 7px;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+}

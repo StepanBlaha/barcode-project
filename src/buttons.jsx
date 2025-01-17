@@ -3,7 +3,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import JsBarcode from "jsbarcode";
 import { jsPDF } from "jspdf";
-import './history.css'
+import './buttons.css';
 
 
 
@@ -23,7 +23,7 @@ function PageButtons({page, setPage}) {
         if (page === "barcode") {
             return (
                 <>
-                    <div className='pageChange' onClick={historyRender}>
+                    <div className='pageChangeButton' onClick={historyRender}>
                         <p>History</p>    
                     </div>
                 </>
@@ -31,7 +31,7 @@ function PageButtons({page, setPage}) {
         } else {
             return (
                 <>
-                    <div className='pageChange' onClick={barcodeRender}>
+                    <div className='pageChangeButton' onClick={barcodeRender}>
                         <p>Barcode</p>    
                     </div>
                 </>
