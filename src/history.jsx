@@ -37,11 +37,50 @@ function HistoryApp() {
         doc.save("barcode.pdf");
     }
 
+
+    //Function for saving barcode as png
+    function savePNG(id, code, barType) {
+        //Creates the barcode
+        async function createBarcode(id, code, format) {
+            try {
+                JsBarcode(id, code, { format: format });
+            } catch (error) {
+                console.error(error)
+                return
+            }
+
+        }
+        createBarcode("#barcodeHidden", code, barType).then(() => {
+            console.log('dssd')
+
+            //Gets the barcode element
+            var barcode = document.getElementById("barcodeHidden")
+            //Turns it to DataURL element 
+            var barcodeUrl = barcode.toDataURL("image/png");
+    
+            //Gets the a element 
+            var link = document.getElementById(id);
+            //Sets its attribute to download the barcode dataURL element
+            link.setAttribute("download", "Barcode.png");
+            link.setAttribute("href", barcodeUrl);
+            //Sets the a display to block
+            link.style.display = "block"
+            
+        })
+        
+
+    }
+
     const recordList = codeRecord.map(record => 
+        
         <div className="record" key={record.id}>
             <div className="barcodeCode">{record.code} </div>
             <div className="barcodeFormat">{record.format}</div>
-            <div className='barcodeSaveCenter' ><div className='barcodeSave'  id={record.id} onClick={() => savePDF(record.id, record.code, record.format)}>Save pdf</div></div>
+            <div className='barcodeSaveCenter' >
+                <div className='barcodeSave' id={record.id} onClick={() => savePDF(record.id, record.code, record.format)}>Save pdf</div>
+                <div className='barcodeSave' id={record.id} onClick={() => savePNG(record.id, record.code, record.format)}>Save png</div>
+
+            </div>
         </div>
    
 

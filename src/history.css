@@ -56,13 +56,14 @@ html,  body{
     width: 100%;
     border: 1px solid yellow;
     margin-top: 5px;
+    display: flex;
+    justify-content: space-evenly;
 }
 .barcodeSave{
-    display: flex
-;
+    display: flex;
     height: 100%;
     width: 30%;
-    margin: 0 auto;
+    float: left;
     align-items: center;
     background-color: #7B7B7B;
     border-radius: 5px;
