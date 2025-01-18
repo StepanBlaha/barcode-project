@@ -40,6 +40,7 @@
     width: 50%;
     display: flex;
     justify-content: space-evenly;
+    gap: 10px;
 }
 .barcodeSave{
     display: flex;
@@ -53,7 +54,30 @@
     align-content: center;
     justify-content: center;
     cursor: pointer;
+    color: white;
     
+}
+.barcodeDelete{
+    display: flex;
+    height: 100%;
+    width: 45px;
+    float: left;
+    align-items: center;
+    background-color: #7B7B7B;
+    border-radius: 5px;
+    font-size: 13px;
+    align-content: center;
+    justify-content: center;
+    cursor: pointer;
+    color: white;
+
+    
+}
+a{
+    color: white;
+}
+a:hover{
+    color: white;
 }
 #barcodeHidden{
     display: none;
