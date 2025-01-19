@@ -8,18 +8,18 @@ import './buttons.css';
 
 
 
-function PageButtons({page, setPage}) {
+function PageButtons({page, changePage}) {
     
 
     function renderBarcode() {
-        setPage("barcode")
+        changePage("barcode")
     }
     function renderHistory() {
-        setPage("history")
+        changePage("history")
     }
     console.log(page)
 
-    function ButtonRender({ barcodeRender, historyRender }) {
+    function ButtonRender({ barcodeRender, historyRender}) {
         if (page === "barcode") {
             return (
                 <>
