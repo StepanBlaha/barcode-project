@@ -27,7 +27,7 @@ function App() {
     console.log('Je to bar')
     return (
       <>
-        <div className='wrapper'>
+        <div className='wrapperBarcode'>
           <div className='mainContent'>
             <BarcodeApp />
           </div>
@@ -42,7 +42,7 @@ function App() {
   if(page === "history"){
     return (
       <>
-        <div className='wrapper'>
+        <div className='wrapperHistory'>
           <div className='mainContent'>
             <HistoryApp />
           </div>

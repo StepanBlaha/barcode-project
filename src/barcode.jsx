@@ -55,7 +55,7 @@ function PdfDownloadButton({saveFunc}) {
 function PngDownloadButton() {
     return(
         <>
-            <a href="" id='barcodeDownload'>
+            <a  id='barcodeDownload'>
                 <div className='downloadPngButton'>
                     <p className='downloadPngText'>Download as PNG</p>
                 </div>

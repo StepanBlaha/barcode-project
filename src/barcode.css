@@ -1,8 +1,13 @@
 .barcodeWrap{
     width: 100%;
     float: left;
-    height: 120px;
+    min-height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: fit-content;
     border: 2px solid rgb(118, 118, 118);
+    margin-bottom: 10px;
 }
 #barcode{
     
@@ -59,6 +64,7 @@
     display: none;
 }
 .downloadPngButton{
+    cursor: pointer;
     display: flex;
     float: left;
     height: 100%;
@@ -67,6 +73,9 @@
     background-color: #7B7B7B;
     border-radius: 5px;
     font-size: 13px;
+    justify-content: center;
+    font-weight: 600 !important;
+    max-width: 145px;
 }
 #barcodeDownload{
     height: 100%;
@@ -74,7 +83,6 @@
     color: white;
 }
 .downloadPdfButton{
-    font-weight: 700;
     cursor: pointer;
     display: flex;
     float: right;
@@ -84,4 +92,7 @@
     background-color: #7B7B7B;
     border-radius: 5px;
     font-size: 13px;
+    justify-content: center;
+    font-weight: 600 !important;
+    max-width: 145px;
 }
