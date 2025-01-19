@@ -18,7 +18,7 @@ function App() {
     const newPage = page
     setPage(newPage)
     sessionStorage.setItem('currentPage', JSON.stringify(newPage))
-    console.log(`Deleted record ${id}`)
+    console.log(`Page ${page} loaded`)
     
   }
   

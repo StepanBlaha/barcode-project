@@ -13,11 +13,9 @@ function PageButtons({page, changePage}) {
 
     function renderBarcode() {
         changePage("barcode")
-        console.log("Barcode page loaded")
     }
     function renderHistory() {
         changePage("history")
-        console.log("History page loaded")
     }
 
 
