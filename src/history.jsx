@@ -39,6 +39,7 @@ function HistoryApp() {
         doc.addImage(barcodeUrl, "PNG", 110, 10, barcodeWidth, barcodeHeight );
         //Save the pdf
         doc.save("barcode.pdf");
+        console.log(`PDF ${id} downloaded`)
     }
 
 
@@ -70,7 +71,7 @@ function HistoryApp() {
         downloadLink.setAttribute("download", "Barcode.png");
         downloadLink.setAttribute("href", barcodeUrl);
 
-        console.log("Download triggered for PNG");
+        console.log(`PNG ${id} downloaded`);
     }
 
     //Function for deleing a history record

@@ -15,7 +15,6 @@ function App() {
   })
 
   function setPageFunc(page) {
-    const currentPage = JSON.parse(sessionStorage.getItem('currentPage')) || [];
     const newPage = page
     setPage(newPage)
     sessionStorage.setItem('currentPage', JSON.stringify(newPage))
@@ -24,7 +23,6 @@ function App() {
   }
   
   if (page === "barcode") {
-    console.log('Je to bar')
     return (
       <>
         <div className='wrapperBarcode'>
