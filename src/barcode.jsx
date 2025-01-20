@@ -3,97 +3,10 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './barcode.css'
 import JsBarcode from "jsbarcode";
+import { CodeForm, FormatSelect, DownloadButtons, NumberSelect } from "./components/barcodeComponents.jsx";
 import { jsPDF } from "jspdf";
 
 
-//Form for submiting the code
-function CodeForm({onSubmit}){
-    return(
-        <>
-            <div className='formDiv'>
-                <form action="" id='codeForm' onSubmit={onSubmit}>
-                    <input type="text" id='codeInput' />
-                    <input type="submit" id='codeSubmit' />
-                </form>
-            </div>
-        </>
-    )
-}
-//Select box
-function SelectBox({setBarType, setCode}){
-    return(
-        <>
-            <div className='selectDiv'>
-                <select name="formatSelect" id='formatSelect' onChange={(e)=> {setBarType(e.target.value); setCode(null)}}>
-                    <option value="CODE128" >CODE128</option>
-                    <option value="EAN13">EAN13</option>
-                    <option value="EAN8">EAN8</option>
-                    <option value="UPC">UPC</option>
-                    <option value="UPC_E">UPC_E</option>
-                    <option value="ISBN">ISBN</option>
-                    <option value="ITF14">ITF14</option>
-                    <option value="CODABAR">CODABAR</option>
-                    <option value="MSI">MSI</option>
-                    <option value="POSTNET">POSTNET</option>
-                    <option value="GSI_128">GSI_128</option>
-                </select>
-            </div>
-        </>
-    )
-}
-
-
-function NumberSelect({setPDFNumber, setCode}) {
-    return(
-        <>
-            <div className='selectDiv'>
-                <select name="numberSelect" id='numberSelect' onChange={(e) => { setPDFNumber(e.target.value); setCode(null); console.log(e.target.value)}}>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                </select>
-            </div>
-        </>
-    )
-}
-//PDF download button
-function PdfDownloadButton({saveFunc}) {
-    return(
-        <>
-            <div className='downloadPdfButton' onClick={saveFunc}>
-                <p className='downloadPdfText'>Download as PDF</p>
-            </div>
-        </>
-    )
-}
-//PNG download button
-function PngDownloadButton() {
-    return(
-        <>
-            <a  id='barcodeDownload'>
-                <div className='downloadPngButton'>
-                    <p className='downloadPngText'>Download as PNG</p>
-                </div>
-            </a>
-        </>
-    )
-}
-//Div Containing all the download buttons
-function DownloadButtons({func}) {
-    return(
-        <>
-            <div id='downloadButtonWrapper'>
-                <PdfDownloadButton saveFunc = {func}/>
-                <PngDownloadButton/>
-            </div>
-        </>
-    )
-}
 
 
 
@@ -335,8 +248,8 @@ function BarcodeApp() {
             <canvas id="barcode"></canvas>
         </div>
         <CodeForm onSubmit={formSubmit}/>
-        <SelectBox setBarType={setBarType} setCode={setCode} />
-        <NumberSelect setPDFNumber={setPDFNumber} setCode={setCode} />
+        <FormatSelect setBarType={setBarType} setCode={setCode} />
+        <NumberSelect setPDFNumber={setPDFNumber} PDFNumber={PDFNumber}/>
         <DownloadButtons func = {()=>savePDF("barcode")}/>
 
 
