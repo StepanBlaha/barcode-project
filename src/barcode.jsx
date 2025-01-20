@@ -13,7 +13,7 @@ function CodeForm({onSubmit}){
             <div className='formDiv'>
                 <form action="" id='codeForm' onSubmit={onSubmit}>
                     <input type="text" id='codeInput' />
-                    <input type="submit"  />
+                    <input type="submit" id='codeSubmit' />
                 </form>
             </div>
         </>
@@ -98,7 +98,8 @@ function DownloadButtons({func}) {
 
 
 function BarcodeApp() {
-    const [PDFNumber, setPDFNumber] = useState(10)
+    //State for changing number of barcodes in saved PDF
+    const [PDFNumber, setPDFNumber] = useState(1)
     //State for managing inputed code
     const [code, setCode] = useState(null)
     //State for changin barcode method in future
@@ -293,7 +294,7 @@ function BarcodeApp() {
         //Turns it to DataURL element 
         var barcodeUrl = barcode.toDataURL("image/png");
         //Generated barcode width
-        const barcodeWidth = 80;
+        const barcodeWidth = 90;
         //Barcode height to keep the ratio
         const barcodeHeight = (barcode.height / barcode.width) * barcodeWidth;
         //Initialize pdf object
@@ -309,15 +310,16 @@ function BarcodeApp() {
                 x = 10;
                 y += barcodeHeight + 5;
             }
-
-            doc.addImage(barcodeUrl, "PNG", x, y, barcodeWidth, barcodeHeight );
-            x += barcodeWidth + 10
             
-            if (y + barcodeHeight > doc.internal.pageSize.height - 5) {
+            if (y + barcodeHeight > doc.internal.pageSize.height - 10) {
                 doc.addPage()
                 y = 10
                 x = 10
             }
+
+            doc.addImage(barcodeUrl, "PNG", x, y, barcodeWidth, barcodeHeight );
+            x += barcodeWidth + 10
+            
         }
         //Add the barcode DataUrl to it in format of PNG
         //Image, format of the file, x-cord, y-cord, width, height

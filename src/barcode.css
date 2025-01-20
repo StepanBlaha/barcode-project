@@ -23,6 +23,9 @@
     width: 100%;
     float: left;
 }
+#codeSubmit{
+    margin-top: 10px;
+}
 .selectDiv{
     width: 50%;
     float: left;
@@ -31,6 +34,12 @@
 #formatSelect{
     height: 100%;
     float: right;
+}
+
+#numberSelect{
+    height: 100%;
+    float: right;
+    margin-top: 10px;
 }
 .errorDiv{
     float: left;
