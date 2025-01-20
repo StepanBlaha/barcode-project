@@ -41,6 +41,26 @@ function SelectBox({setBarType, setCode}){
         </>
     )
 }
+
+
+function NumberSelect({setPDFNumber, setCode}) {
+    return(
+        <>
+            <div className='selectDiv'>
+                <select name="numberSelect" id='numberSelect' onChange={(e)=> {setPDFNumber(e.target.value); setCode(null)}}>
+                    <option value="1"></option>
+                    <option value="2"></option>
+                    <option value="3"></option>
+                    <option value="4"></option>
+                    <option value="5"></option>
+                    <option value="6"></option>
+                    <option value="7"></option>
+                    <option value="8"></option>
+                </select>
+            </div>
+        </>
+    )
+}
 //PDF download button
 function PdfDownloadButton({saveFunc}) {
     return(
@@ -78,6 +98,7 @@ function DownloadButtons({func}) {
 
 
 function BarcodeApp() {
+    const [PDFNumber, setPDFNumber] = useState(10)
     //State for managing inputed code
     const [code, setCode] = useState(null)
     //State for changin barcode method in future
@@ -140,9 +161,6 @@ function BarcodeApp() {
         });
         localStorage.setItem('codeRecord', JSON.stringify(codeRecord));
     }
-
-
-
 
     //Function for checking if the input has correct attributs for chosen barcode format
     function lengthCheck(input) {
@@ -280,10 +298,29 @@ function BarcodeApp() {
         const barcodeHeight = (barcode.height / barcode.width) * barcodeWidth;
         //Initialize pdf object
         const doc = new jsPDF();
+
+        const pageWidth = doc.internal.pageSize.width - 10;
+
+        let y = 10;
+        let x = 10
+
+        for (let index = 0; index < PDFNumber; index++) {
+            if (x + barcodeWidth > pageWidth) {
+                x = 10;
+                y += barcodeHeight + 5;
+            }
+
+            doc.addImage(barcodeUrl, "PNG", x, y, barcodeWidth, barcodeHeight );
+            x += barcodeWidth + 10
+            
+            if (y + barcodeHeight > doc.internal.pageSize.height - 5) {
+                doc.addPage()
+                y = 10
+                x = 10
+            }
+        }
         //Add the barcode DataUrl to it in format of PNG
         //Image, format of the file, x-cord, y-cord, width, height
-        doc.addImage(barcodeUrl, "PNG", 1, 10, barcodeWidth, barcodeHeight );
-        doc.addImage(barcodeUrl, "PNG", 110, 10, barcodeWidth, barcodeHeight );
         //Save the pdf
         doc.save("barcode.pdf");
         
