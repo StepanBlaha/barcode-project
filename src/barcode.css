@@ -30,6 +30,12 @@
     width: 50%;
     float: left;
     height: 21.2px;
+    margin-bottom: 10px;
+}
+.selectNumberDiv{
+    width: fit-content;
+    float: right;
+    height: 21.2px;
 }
 #formatSelect{
     height: 100%;
@@ -39,7 +45,7 @@
 #numberSelect{
     height: 100%;
     float: right;
-    margin-top: 10px;
+    
 }
 .errorDiv{
     float: left;

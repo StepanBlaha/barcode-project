@@ -73,7 +73,7 @@ export const DownloadButtons = function DownloadButtons({func}) {
 export const NumberSelect = function NumberSelect({setPDFNumber, PDFNumber}) {
     return(
         <>
-            <div className='selectDiv'>
+            <div className='selectNumberDiv'>
                 <select name="numberSelect" value={PDFNumber} id='numberSelect' onChange={(e) => { setPDFNumber(e.target.value); ; console.log(e.target.value)}}>
                     <option value="1">1</option>
                     <option value="2">2</option>
