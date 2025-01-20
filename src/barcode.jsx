@@ -47,15 +47,15 @@ function NumberSelect({setPDFNumber, setCode}) {
     return(
         <>
             <div className='selectDiv'>
-                <select name="numberSelect" id='numberSelect' onChange={(e)=> {setPDFNumber(e.target.value); setCode(null)}}>
-                    <option value="1"></option>
-                    <option value="2"></option>
-                    <option value="3"></option>
-                    <option value="4"></option>
-                    <option value="5"></option>
-                    <option value="6"></option>
-                    <option value="7"></option>
-                    <option value="8"></option>
+                <select name="numberSelect" id='numberSelect' onChange={(e) => { setPDFNumber(e.target.value); setCode(null); console.log(e.target.value)}}>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
                 </select>
             </div>
         </>
@@ -333,7 +333,8 @@ function BarcodeApp() {
             <canvas id="barcode"></canvas>
         </div>
         <CodeForm onSubmit={formSubmit}/>
-        <SelectBox setBarType={setBarType} setCode={setCode}/>
+        <SelectBox setBarType={setBarType} setCode={setCode} />
+        <NumberSelect setPDFNumber={setPDFNumber} setCode={setCode} />
         <DownloadButtons func = {()=>savePDF("barcode")}/>
 
 
