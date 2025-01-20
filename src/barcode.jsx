@@ -293,7 +293,7 @@ function BarcodeApp() {
         //Turns it to DataURL element 
         var barcodeUrl = barcode.toDataURL("image/png");
         //Generated barcode width
-        const barcodeWidth = 100;
+        const barcodeWidth = 80;
         //Barcode height to keep the ratio
         const barcodeHeight = (barcode.height / barcode.width) * barcodeWidth;
         //Initialize pdf object
