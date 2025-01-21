@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -6,9 +6,30 @@ import './index.css'
 import BarcodeApp from './barcode.jsx'
 import HistoryApp from './history.jsx'
 import PageButtons from './buttons.jsx'
+import { fetchData, postData } from "./api.js";
 
 function App() {
- 
+  const [data, setData] = useState([]);
+  const [newItem, setNewItem] = useState("");
+
+  useEffect(() => {
+      const loadData = async () => {
+          const fetchedData = await fetchData();
+          setData(fetchedData);
+      };
+      loadData();
+  }, []);
+
+  const handleAdd = async () => {
+      if (newItem.trim() !== "") {
+          const result = await postData({ name: newItem });
+          setData((prev) => [...prev, result]);
+          setNewItem("");
+      }
+  };
+
+
+
   const [page, setPage] = useState(() => {
     const currPage = JSON.parse(sessionStorage.getItem('currentPage')) || "barcode";
     return currPage;
@@ -32,6 +53,23 @@ function App() {
           <div className='buttonNav'>
             <PageButtons page={page} changePage={setPageFunc}/>
           </div>
+        </div>
+
+
+
+        <div>
+            <h1>MongoDB Data</h1>
+            <ul>
+                {data.map((item) => (
+                    <li key={item._id}>{item.name}</li>
+                ))}
+            </ul>
+            <input
+                type="text"
+                value={newItem}
+                onChange={(e) => setNewItem(e.target.value)}
+            />
+            <button onClick={handleAdd}>Add Item</button>
         </div>
       </>
     )
