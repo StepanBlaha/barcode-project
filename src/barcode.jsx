@@ -1,15 +1,10 @@
 import { useEffect, useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './barcode.css'
+import './css/barcode.css'
 import JsBarcode from "jsbarcode";
 import { CodeForm, FormatSelect, DownloadButtons, NumberSelect } from "./components/barcodeComponents.jsx";
 import { jsPDF } from "jspdf";
 
-
-
-
-
+//Barcode app component
 function BarcodeApp() {
     //State for changing number of barcodes in saved PDF
     const [PDFNumber, setPDFNumber] = useState(1)
@@ -17,16 +12,15 @@ function BarcodeApp() {
     const [code, setCode] = useState(null)
     //State for changin barcode method in future
     const [barType, setBarType] = useState("CODE128")
-
+    //State with errors
     const[error, setError] = useState('')
-
 
     //useEffect dela to ze se spusti az se element nacte, do listu dozadu muzeme dat zase parametry
     //Creates the bracode
     useEffect(()=>{
         //Checks if code, barcode exist and erro doesnt
         if(code && barType && error==""){
-            
+            //Array containing valid barcode
             const validFormats = [
                 "CODE128", "EAN13", "EAN8", "UPC", "UPC_E", "ISBN", 
                 "ITF14", "CODABAR", "MSI", "POSTNET", "GSI_128"
@@ -34,37 +28,36 @@ function BarcodeApp() {
             
             if (validFormats.includes(barType)) {
                 JsBarcode("#barcode", code, { format: barType });
-                saveBarcode("barcode")
+                savePNG("barcode")
                 barcodeHistory();
             } else {
-                console.log(barType)
                 setError('Invalid barcode format');
             }
-        }else{
-
         }
 
     },[code, barType, error]);
 
-    //Function for saving barcode as png
-    function saveBarcode(barcodeId){
-        //----For downloading normal png----
-        //Gets the barcode element
-        var barcode = document.getElementById(barcodeId)
-        //Turns it to DataURL element 
-        var barcodeUrl = barcode.toDataURL("image/png");
+    //Debug message if there is an error
+    useEffect(()=>{
+        error && console.error(error)
+    }, [error]);
 
+    //Function for saving barcode as PNG
+    function savePNG(barcodeId){
+        //Gets the barcode element
+        const barcode = document.getElementById(barcodeId)
+        //Turns it to DataURL element 
+        const barcodeUrl = barcode.toDataURL("image/png");
         //Gets the a element 
-        var link = document.getElementById("barcodeDownload");
+        const link = document.getElementById("barcodeDownload");
         //Sets its attribute to download the barcode dataURL element
         link.setAttribute("download", "Barcode.png");
         link.setAttribute("href", barcodeUrl);
         //Sets the a display to block
         link.style.display="block"
-
     }
 
-
+    //Function for updating barcode generator history
     function barcodeHistory() {
         const codeRecord = JSON.parse(localStorage.getItem('codeRecord')) || [];
         const newId = codeRecord.length
@@ -162,22 +155,20 @@ function BarcodeApp() {
                 }
                 break;
         }
-        //checks if no format issues occured
+        //checks if any format issues occured
         if (errorMessage!=="") {
             //sets error to the error message if yes
             setError(errorMessage)
-            //debug
-            console.log("Error: "+errorMessage)
         }else{
             //sets error to empty if no
             setError('')
             //sets the code for barcode
             setCode(input)
             //Displays the download buttons
-            document.getElementById("downloadButtonWrapper").style.display = "block";
-            
+            document.getElementById("downloadButtonWrapper").style.display = "block";   
         }
     }
+
     //Function for sending input value to process
     function formSubmit(event) {
         //Stops the sending and reloading
@@ -188,24 +179,12 @@ function BarcodeApp() {
         lengthCheck(input);
     }
 
-    const errorElement = () =>{
-        if (error) {
-            return(
-                <>
-                    <div className='errorDiv'>
-                        <p className='erroMSG'>{error}</p>
-                    </div>
-                </>
-            )
-            
-        }
-    }
-
+    //Function for saving barcode as PDF
     function savePDF(barcodeID) {
         //Gets the barcode element
-        var barcode = document.getElementById(barcodeID)
+        const barcode = document.getElementById(barcodeID)
         //Turns it to DataURL element 
-        var barcodeUrl = barcode.toDataURL("image/png");
+        const barcodeUrl = barcode.toDataURL("image/png");
         //Generated barcode width
         const barcodeWidth = 90;
         //Barcode height to keep the ratio
@@ -234,14 +213,9 @@ function BarcodeApp() {
             x += barcodeWidth + 10
             
         }
-        //Add the barcode DataUrl to it in format of PNG
-        //Image, format of the file, x-cord, y-cord, width, height
-        //Save the pdf
         doc.save("barcode.pdf");
-        
     }
     
-
   return (
     <>
         <div className='barcodeWrap'>
@@ -251,10 +225,6 @@ function BarcodeApp() {
         <FormatSelect setBarType={setBarType} setCode={setCode} />
         <NumberSelect setPDFNumber={setPDFNumber} PDFNumber={PDFNumber}/>
         <DownloadButtons func = {()=>savePDF("barcode")}/>
-
-
-
-        {errorElement()}
     </>
   )
 }

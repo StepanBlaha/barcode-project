@@ -19,6 +19,4 @@ Currently, two official plugins are available:
 
 
 Todo:
-- design
-- history (save each code and format to local storage then render it on different page)(maybe mongo db)
 - print

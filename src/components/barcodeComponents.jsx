@@ -11,7 +11,7 @@ export const CodeForm = function CodeForm({onSubmit}){
         </>
     )
 }
-//Select box
+//Format select box
 export const FormatSelect = function FormatSelect({setBarType, setCode}){
     return(
         <>
@@ -33,8 +33,6 @@ export const FormatSelect = function FormatSelect({setBarType, setCode}){
         </>
     )
 }
-
-
 //PDF download button
 export const PdfDownloadButton = function PdfDownloadButton({saveFunc}) {
     return(
@@ -69,7 +67,7 @@ export const DownloadButtons = function DownloadButtons({func}) {
     )
 }
 
-
+//Number select box
 export const NumberSelect = function NumberSelect({setPDFNumber, PDFNumber}) {
     return(
         <>
