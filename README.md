@@ -2,7 +2,7 @@
 
 Generate barcodes based on the code and the barcode format.\
 Save the barcode as png or pdf.\
-See all past generated barcodes.\
+See all past generated barcodes.
 
 <!---
 - git status (get status of changes)
