@@ -17,12 +17,17 @@ function PageButtons({page, changePage}) {
         "history" : renderBarcode
     }
 
+    const pageName = {
+        "barcode" : "history",
+        "history" : "barcode"
+    }
+
     //Element which renders corresponding button based on current page
     function ButtonRender() {
         return (
             <>
                 <div className='pageChangeButton' onClick={buttonDict[page]}>
-                    <p>{capitalize(page)}</p>    
+                    <p>{capitalize(pageName[page])}</p>    
                 </div>
             </>
         )
