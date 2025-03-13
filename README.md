@@ -4,7 +4,7 @@ Generate barcodes based on the code and the barcode format.\
 Save the barcode as png or pdf.\
 See all past generated barcodes.\
 Deployed at:\
-(barcode.hahabit.fun)
+[Hahabit barcode generator](barcode.hahabit.fun)
 
 <!---
 - git status (get status of changes)
