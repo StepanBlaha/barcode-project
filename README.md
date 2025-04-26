@@ -1,8 +1,8 @@
-# Barcode Generator :computer:
+# Barcode Generator :wrench:
 
 Generate barcodes based on the code and the barcode format.<br>
 Save the barcode as png or pdf.<br>
-See all past generated barcodes.<br>
+See all the past generated barcodes.<br>
 
 ## Deployed at:
 [barcode.hahabit.fun](http://barcode.hahabit.fun/)
