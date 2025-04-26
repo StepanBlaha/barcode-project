@@ -1,10 +1,10 @@
 # Barcode Generator :computer:
 
-Generate barcodes based on the code and the barcode format.\
-Save the barcode as png or pdf.\
-See all past generated barcodes.\
+Generate barcodes based on the code and the barcode format.<br>
+Save the barcode as png or pdf.<br>
+See all past generated barcodes.<br>
 
-## Deployed at:\
+## Deployed at:
 [barcode.hahabit.fun](http://barcode.hahabit.fun/)
 
 <!---
