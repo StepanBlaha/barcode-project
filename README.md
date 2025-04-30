@@ -14,7 +14,7 @@ See all the past generated barcodes.<br>
 - git clone repository-url (clones the repository to current folder on local machien)
 - git add file  (adds file tobe commited)
 - git commit -m"message" (stages changes to local repository)
-- git push (uploads the changes to github)
+- git push (uploads the changes to github)  
 - git log (display commit history)
 
 Todo:
