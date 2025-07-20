@@ -231,7 +231,7 @@ function Barcode() {
                         <input type="text" id='codeInput' />
                     </form>
                     <div className='ActionGroup'>
-                        <div  type="submit" id='codeSubmit' onClick={(e)=>formSubmit(e)}>Odeslat</div>
+                        <div  type="submit" id='codeSubmit' onClick={(e)=>formSubmit(e)}>Submit</div>
 
                         <div className='selectDiv'>
                             <select name="formatSelect" id='formatSelect' onChange={(e)=> {setBarType(e.target.value); setCode(null)}}>
