@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react'
 import './Barcode.css'
 import JsBarcode from "jsbarcode";
 import { jsPDF } from "jspdf";
-import { Github } from 'lucide-react';
+import Footer from '../../components/Footer/Footer';
+import Header from '../../components/Header/Header';
 
 //Barcode app component
 function Barcode() {
@@ -217,14 +218,7 @@ function Barcode() {
   return (
     <>
     <div className='BarcodePage'>
-        <div className='BarcodeHeader'>
-            <div className='HeaderLogo'>
-                <a href='https://www.linkedin.com/in/%C5%A1t%C4%9Bp%C3%A1n-bl%C3%A1ha-88b59b315/' target='_blank'>SB<span>.</span></a>
-            </div>
-            <div className='HeaderList'>
-                <a href="/history">History</a>
-            </div>
-        </div>
+        <Header page="History" pageSrc="/history"/>
         <div className='BarcodeContent'>
             <div className='Barcode'>
 
@@ -286,31 +280,7 @@ function Barcode() {
             
 
         </div>
-        <div className='BarcodeFooter'>
-            <div className='Socials'>
-                <div className='Social'>
-                    <p className='Title'>SB<span>.</span> Barcode</p>
-                </div>
-                <div className='Social'>
-                    <p>© 2025 Stepan Blaha | All rights reserved.</p>
-                </div>
-                <div className='Social'>
-                    <p>Made by <a href="https://github.com/StepanBlaha" target='_blank'>Stepan Blaha</a></p>
-                    <Github/>
-                </div>
-            </div>
-            <div className='Navigation'>
-                <div className='Nav'>
-                    <p className='Title'>Sites</p>
-                </div>
-                <div className='Nav'>
-                    <a href="/history">History</a>
-                </div>
-                <div className='Nav'>
-                    <a href="/barcode">Barcode</a>
-                </div>
-            </div>
-        </div>
+        <Footer/>
     </div>
         
     </>
