@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react'
-import { NumberSelect } from "./components/barcodeComponents.jsx";
+import { NumberSelect } from '../../components/barcodeComponents.jsx';
 import JsBarcode from "jsbarcode";
 import { jsPDF } from "jspdf";
-import './css/history.css'
+import { createBarcode } from '../../utils/barcode.js';
+import { Github } from 'lucide-react';
+import './History.css'
 
 //History app component
-function HistoryApp() {
+function History() {
     //State for changing number of barcodes in saved PDF
     const [PDFNumber, setPDFNumber] = useState(1)
     //State for keeping th record history
@@ -13,15 +15,6 @@ function HistoryApp() {
         const savedRecord = JSON.parse(localStorage.getItem('codeRecord')) || [];
         return savedRecord;
     })
-
-    //Function for creating barcode
-    function createBarcode(canvasId, code, format) {
-        try {
-            JsBarcode(canvasId, code, { format: format });
-        } catch (error) {
-            console.error("Error creating barcode:", error);
-        }
-    }
 
     //Function from saving pdf from the history table
     function savePDF(id, code, barType) {
@@ -37,27 +30,21 @@ function HistoryApp() {
         const barcodeHeight = (barcode.height / barcode.width) * barcodeWidth;
         //Initialize pdf object
         const doc = new jsPDF();
-
         const pageWidth = doc.internal.pageSize.width - 10;
-
         let y = 10;
         let x = 10
-
         for (let index = 0; index < PDFNumber; index++) {
             if (x + barcodeWidth > pageWidth) {
                 x = 10;
                 y += barcodeHeight + 5;
             }
-            
             if (y + barcodeHeight > doc.internal.pageSize.height - 10) {
                 doc.addPage()
                 y = 10
                 x = 10
             }
-
             doc.addImage(barcodeUrl, "PNG", x, y, barcodeWidth, barcodeHeight );
             x += barcodeWidth + 10
-            
         }
         doc.save("barcode.pdf");
         console.log(`PDF ${id} downloaded`)
@@ -67,25 +54,19 @@ function HistoryApp() {
     function savePNG(id, code, barType) {
         //Create barcode
         createBarcode(`#barcodeHidden`, code, barType);
-
         const barcodeCanvas = document.getElementById("barcodeHidden");
-
         if (!barcodeCanvas) {
             console.error('Canvas with ID "barcodeHidden" not found.');
             return;
         }
-
         const barcodeUrl = barcodeCanvas.toDataURL("image/png");
         const downloadLink = document.getElementById(id);
-
         if (!downloadLink) {
             console.error(`Link element with ID "${id}" not found.`);
             return;
         }
-
         downloadLink.setAttribute("download", "Barcode.png");
         downloadLink.setAttribute("href", barcodeUrl);
-
         console.log(`PNG ${id} downloaded`);
     }
 
@@ -101,8 +82,11 @@ function HistoryApp() {
     //Component with list of all records
     const recordList = codeRecord.map(record => (
         <div className="record" key={record.id}>
-            <div className="barcodeCode">{record.code} </div>
-            <div className="barcodeFormat">{record.format}</div>
+            <div className='BarcodeInfo'>
+                <div className="barcodeCode">{record.code} </div>
+                <div className="barcodeFormat">{record.format}</div>
+            </div>
+            
             <div className='barcodeSaveCenter' >
                 <a className='barcodeSave' id={record.id} onClick={() => savePDF(record.id, record.code, record.format)}>Save pdf</a>
                 <a className='barcodeSave' id={`${record.id}PNG`} onClick={() => savePNG(`${record.id}PNG`, record.code, record.format)}>Save png</a>
@@ -116,10 +100,50 @@ function HistoryApp() {
     function RecordList() {
         return (
             <>
-                <div className="recordList">
-                    {recordList}
+            <div className='BarcodePage'>
+                <div className='BarcodeHeader'>
+                    <div className='HeaderLogo'>
+                        <a href='https://www.linkedin.com/in/%C5%A1t%C4%9Bp%C3%A1n-bl%C3%A1ha-88b59b315/' target='_blank'>SB<span>.</span></a>
+                    </div>
+                    <div className='HeaderList'>
+                        <a href="/barcode">Barcode</a>
+                    </div>
                 </div>
-                <canvas id="barcodeHidden"></canvas>
+                <div className='BarcodeContent'>
+                    <div className='Barcode'>
+                        <div className="recordList">
+                            {recordList}
+                        </div>
+                        <canvas id="barcodeHidden"></canvas>
+                    </div>
+                </div>
+
+                <div className='BarcodeFooter'>
+                    <div className='Socials'>
+                        <div className='Social'>
+                            <p className='Title'>SB<span>.</span> Barcode</p>
+                        </div>
+                        <div className='Social'>
+                            <p>© 2025 Stepan Blaha | All rights reserved.</p>
+                        </div>
+                        <div className='Social'>
+                            <p>Made by <a href="https://github.com/StepanBlaha" target='_blank'>Stepan Blaha</a></p>
+                            <Github/>
+                        </div>
+                    </div>
+                    <div className='Navigation'>
+                        <div className='Nav'>
+                            <p className='Title'>Sites</p>
+                        </div>
+                        <div className='Nav'>
+                            <a href="/history">History</a>
+                        </div>
+                        <div className='Nav'>
+                            <a href="/barcode">Barcode</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
             </>
         )
     }
@@ -130,4 +154,4 @@ function HistoryApp() {
         </>
     )
 }
-export default HistoryApp
+export default History

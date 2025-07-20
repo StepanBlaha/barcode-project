@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
-import './css/barcode.css'
+import './Barcode.css'
 import JsBarcode from "jsbarcode";
-import { CodeForm, FormatSelect, DownloadButtons, NumberSelect } from "./components/barcodeComponents.jsx";
 import { jsPDF } from "jspdf";
+import { Github } from 'lucide-react';
 
 //Barcode app component
-function BarcodeApp() {
+function Barcode() {
     //State for changing number of barcodes in saved PDF
     const [PDFNumber, setPDFNumber] = useState(1)
     //State for managing inputed code
@@ -81,64 +81,64 @@ function BarcodeApp() {
         switch(barType){
             case "EAN13":
                 if(!isnum){
-                    errorMessage = "doesnt contain only digits"
+                    errorMessage = "doesnt contain only digits / neobsahuje pouze čísla"
                 }
                 if (inputLength !== 13) {
-                    errorMessage = "invalid length"
+                    errorMessage = "invalid length / špatný formát"
                 }
                 break;
             case "EAN8":
                 if(!isnum){
-                    errorMessage = "doesnt contain only digits"
+                    errorMessage = "doesnt contain only digits / neobsahuje pouze čísla"
                 }
                 if (inputLength !== 8) {
-                    errorMessage = "invalid length"
+                    errorMessage = "invalid length / špatný formát"
                 }
                 break;
             
             case "UPC":
                 if(!isnum){
-                    errorMessage = "doesnt contain only digits"
+                    errorMessage = "doesnt contain only digits / neobsahuje pouze čísla"
                 }
                 if (inputLength !== 12) {
-                    errorMessage = "invalid length"
+                    errorMessage = "invalid length / špatný formát"
                 }
                 break;
             case "UPC_E":
                 if(!isnum){
-                    errorMessage = "doesnt contain only digits"
+                    errorMessage = "doesnt contain only digits / neobsahuje pouze čísla"
                 }
                 if (inputLength !== 6) {
-                    errorMessage = "invalid length"
+                    errorMessage = "invalid length / špatný formát"
                 }
                 break;
             case "ISBN":
                 if(!isnum){
-                    errorMessage = "doesnt contain only digits"
+                    errorMessage = "doesnt contain only digits / neobsahuje pouze čísla"
                 }
                 if (inputLength !== 10 && inputLength !== 13) {
-                    errorMessage = "invalid length"
+                    errorMessage = "invalid length / špatný formát"
                 }
                 break;
             case "ITF14":
                 if(!isnum){
-                    errorMessage = "doesnt contain only digits"
+                    errorMessage = "doesnt contain only digits / neobsahuje pouze čísla"
                 }
                 if (inputLength !== 14) {
-                    errorMessage = "invalid length"
+                    errorMessage = "invalid length / špatný formát"
                 }
                 break;
             case "CODABAR":
                 if (inputLength < 10 && inputLength > 16) {
-                    errorMessage = "invalid length"
+                    errorMessage = "invalid length / špatný formát"
                 }
                 break;
             case "MSI":
                 if(!isnum){
-                    errorMessage = "doesnt contain only digits"
+                    errorMessage = "doesnt contain only digits / neobsahuje pouze čísla"
                 }
                 if (inputLength !== 8 && inputLength !== 10) {
-                    errorMessage = "invalid length"
+                    errorMessage = "invalid length / špatný formát"
                 }
                 break;
             case "POSTNET":
@@ -146,26 +146,24 @@ function BarcodeApp() {
                     errorMessage = "doesnt contain only digits"
                 }
                 if (inputLength !== 5 && inputLength !== 9) {
-                    errorMessage = "invalid length"
+                    errorMessage = "invalid length / špatný formát"
                 }
                 break;
             case "GSI_128":
                 if (inputLength !== 18) {
-                    errorMessage = "invalid length"
+                    errorMessage = "invalid length / špatný formát"
                 }
                 break;
         }
         //checks if any format issues occured
         if (errorMessage!=="") {
             //sets error to the error message if yes
-            setError(errorMessage)
+            alert(errorMessage)
         }else{
             //sets error to empty if no
             setError('')
             //sets the code for barcode
             setCode(input)
-            //Displays the download buttons
-            document.getElementById("downloadButtonWrapper").style.display = "block";   
         }
     }
 
@@ -218,15 +216,105 @@ function BarcodeApp() {
     
   return (
     <>
-        <div className='barcodeWrap'>
-            <canvas id="barcode"></canvas>
+    <div className='BarcodePage'>
+        <div className='BarcodeHeader'>
+            <div className='HeaderLogo'>
+                <a href='https://www.linkedin.com/in/%C5%A1t%C4%9Bp%C3%A1n-bl%C3%A1ha-88b59b315/' target='_blank'>SB<span>.</span></a>
+            </div>
+            <div className='HeaderList'>
+                <a href="/history">History</a>
+            </div>
         </div>
-        <CodeForm onSubmit={formSubmit}/>
-        <FormatSelect setBarType={setBarType} setCode={setCode} />
-        <NumberSelect setPDFNumber={setPDFNumber} PDFNumber={PDFNumber}/>
-        <DownloadButtons func = {()=>savePDF("barcode")}/>
+        <div className='BarcodeContent'>
+            <div className='Barcode'>
+
+                <div className='BarcodeWrap'>
+                    <canvas id="barcode"></canvas>
+                </div>
+
+                <div className='formDiv'>
+                    <form action="" id='codeForm' >
+                        <input type="text" id='codeInput' />
+                    </form>
+                    <div className='ActionGroup'>
+                        <div  type="submit" id='codeSubmit' onClick={(e)=>formSubmit(e)}>Odeslat</div>
+
+                        <div className='selectDiv'>
+                            <select name="formatSelect" id='formatSelect' onChange={(e)=> {setBarType(e.target.value); setCode(null)}}>
+                                <option value="CODE128" >CODE128</option>
+                                <option value="EAN13">EAN13</option>
+                                <option value="EAN8">EAN8</option>
+                                <option value="UPC">UPC</option>
+                                <option value="UPC_E">UPC_E</option>
+                                <option value="ISBN">ISBN</option>
+                                <option value="ITF14">ITF14</option>
+                                <option value="CODABAR">CODABAR</option>
+                                <option value="MSI">MSI</option>
+                                <option value="POSTNET">POSTNET</option>
+                                <option value="GSI_128">GSI_128</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div className='DownloadSection'>
+                <div className='selectNumberDiv'>
+                    <p>Number of copies</p>
+                    <select name="numberSelect" value={PDFNumber} id='numberSelect' onChange={(e) => { setPDFNumber(e.target.value); ; console.log(e.target.value)}}>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                    </select>
+                </div>
+                <a id="barcodeDownload">
+                    <div className='DownloadButton' id="barcodeDownload" >
+                        <p className='downloadPngText'>Download as PNG</p>
+                    </div>
+
+                </a>
+                <div className='DownloadButton' onClick={()=>savePDF("barcode")}>
+                    <p className='downloadPdfText'>Download as PDF</p>
+                </div>
+
+            </div>
+            
+
+        </div>
+        <div className='BarcodeFooter'>
+            <div className='Socials'>
+                <div className='Social'>
+                    <p className='Title'>SB<span>.</span> Barcode</p>
+                </div>
+                <div className='Social'>
+                    <p>© 2025 Stepan Blaha | All rights reserved.</p>
+                </div>
+                <div className='Social'>
+                    <p>Made by <a href="https://github.com/StepanBlaha" target='_blank'>Stepan Blaha</a></p>
+                    <Github/>
+                </div>
+            </div>
+            <div className='Navigation'>
+                <div className='Nav'>
+                    <p className='Title'>Sites</p>
+                </div>
+                <div className='Nav'>
+                    <a href="/history">History</a>
+                </div>
+                <div className='Nav'>
+                    <a href="/barcode">Barcode</a>
+                </div>
+            </div>
+        </div>
+    </div>
+        
     </>
-  )
+    )
 }
 
-export default BarcodeApp
+export default Barcode

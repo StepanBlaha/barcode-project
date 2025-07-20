@@ -3,39 +3,4 @@
     animation: logo-spin infinite 20s linear;
   }
 }
-html,  body{
-  height: 100%;
-  width: 100%;
-}
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  box-sizing: border-box;
-}
-.mainContent{
-  height: 80%;
-  width: 100%;
-  float: left;
-}
-.wrapperBarcode{
-  height: 80%;
-  width: 90%;
-  margin: auto auto;
-  max-width: 400px;
-}
-.wrapperHistory{
-  height: 80%;
-  width: 90%;
-  margin: auto auto;
-}
-.buttonNav{
-  position: relative;
-  height: 20%;
-  width: 100%;
-  float: left;
-}
+

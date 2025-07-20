@@ -1,0 +1,123 @@
+.recordList{
+    height: 100%;
+    width: 100%;
+    margin: 0 auto;
+    overflow-y: auto;
+    display: flex;
+    max-width: min(400px, 100%);
+    flex-direction: column;
+    gap: 10px;
+}
+.record{
+    display: flex;
+    height: fit-content;
+    width: 100%;
+    float: left;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    padding: 10px 10px;
+    box-sizing: border-box;
+    flex-direction: column;
+    gap: 8px;
+    border-radius: 12px;
+}
+.barcodeCode::-webkit-scrollbar-track {
+    background: transparent;  
+    border-radius: 10px;
+}
+.barcodeCode::-webkit-scrollbar {
+    width: 12px;            
+    height: 12px;            
+}
+.barcodeCode::-webkit-scrollbar-thumb {
+    background-color: #7B7B7B; 
+    transition: 0.3s ease-out;
+    border-radius: 10px;
+    border: 3px solid #f0f0f0;  
+}
+.barcodeCode::-webkit-scrollbar-thumb:hover {
+    background-color: #474747;
+}
+.BarcodeInfo{
+    width: 100%;
+    height: fit-content;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+}
+.record:nth-child(even){background-color: #414141;}
+.barcodeCode, .barcodeFormat{
+    width: fit-content;
+    height: fit-content;
+    margin: 0;
+    font-weight: 600;
+    font-family: "Barlow Condensed", "sans-serif";
+    transition: 0.3s ease-out;
+    cursor: pointer;
+    font-size: 30px;
+    color: White;
+    text-decoration: none;
+}
+.barcodeCode{
+    overflow: auto;
+}
+.barcodeSaveCenter{
+    float: left;
+    height: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    gap: 10px;
+    align-content: center;
+    align-items: center;
+}
+.barcodeSave{
+    display: flex;
+    height: 100%;
+    width: 90px;
+    float: left;
+    align-items: center;
+    background-color: #7B7B7B;
+    border-radius: 5px;
+    font-size: 13px;
+    align-content: center;
+    justify-content: center;
+    cursor: pointer;
+    color: white;
+    transition: 0.3s ease-out;
+}
+.barcodeSave:hover{
+    background-color: #474747;
+}
+.barcodeDelete{
+    display: flex;
+    height: 100%;
+    width: 45px;
+    float: left;
+    align-items: center;
+    background-color: #7B7B7B;
+    border-radius: 5px;
+    font-size: 13px;
+    align-content: center;
+    justify-content: center;
+    cursor: pointer;
+    color: white;
+    transition: 0.3s ease-out;
+}
+.barcodeDelete:hover{
+    background-color: #474747;
+}
+a{
+    color: white;
+    font-family: "Roboto Flex", "sans-serif";
+}
+a:hover{
+    color: white;
+}
+#barcodeHidden{
+    display: none;
+}
